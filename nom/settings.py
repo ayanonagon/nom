@@ -123,7 +123,14 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'orders',
+    'django_twilio',
 )
+
+# Twilio variables necessary for using the django_twilio library
+# and associated Twilio API calls.
+TWILIO_ACCOUNT_SID = 'AC9972691557a242868f1d05a985d48948'
+TWILIO_AUTH_TOKEN = '0073d596e39d883b4628c487f0541b54'
+TWILIO_DEFAULT_CALLERID = '5166606162'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

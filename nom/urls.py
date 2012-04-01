@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django_twilio.views import sms
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -14,4 +15,9 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    
+    # Twilio SMS reply
+    url(r'^sms/$', 'django_twilio.views.sms', {
+        'message': 'Thanks for the SMS. Talk to you soon!',
+    }),
 )
