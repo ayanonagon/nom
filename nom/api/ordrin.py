@@ -1,4 +1,3 @@
-import urllib
 import urllib2
 
 ORDERIN_API_KEY = 'X2RlbGl2ZXJpbmciOjAsIg'
