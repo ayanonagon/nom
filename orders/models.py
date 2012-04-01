@@ -11,5 +11,5 @@ class UserProfile(models.Model):
 
 class Order(models.Model):
     """A Django model representing a food order."""
-    owner = model.OneToOneField(UserProfile) # The user who started the order.
-    joiners = model.ManyToManyField(UserProfile) # Other users who want in on the order.
+    owner = models.OneToOneField(UserProfile) # The user who started the order.
+    # joiners = models.ManyToManyField(UserProfile) # Other users who want in on the order.
