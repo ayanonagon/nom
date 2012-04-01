@@ -15,9 +15,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    
-    # Twilio SMS reply
-    url(r'^sms/$', 'django_twilio.views.sms', {
-        'message': 'Thanks for the SMS. Talk to you soon!',
-    }),
-)
+   
+) 
