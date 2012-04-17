@@ -1,7 +1,7 @@
 from twilio.rest import TwilioRestClient
 
-account = "AC6df70416da014a08ba197deda48ed274"
-token = "625b6abc9ef179dd021cc4ebc374b0ad"
+account = "REDACTED"
+token = "REDACTED"
 client = TwilioRestClient(account, token)
                                      
 def send_notification_to(phone_number, message_text):
@@ -9,4 +9,4 @@ def send_notification_to(phone_number, message_text):
                                          body=message_text)
 
 if __name__ == '__main__':
-    send_notification_to('+12012483731', 'nom nom nom')
+    send_notification_to('+somenumber', 'nom nom nom')
