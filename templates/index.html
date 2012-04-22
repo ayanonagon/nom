@@ -1,0 +1,18 @@
+<html>
+<head>
+</head>
+<body>
+
+<h1>Welcome to herokutest!</h1>
+
+{% for userprofile in userprofiles %}
+<div>
+    <h2>{{ userprofile.user }}</h2>
+    <p>{{ userprofile.phone_number }}</p>
+</div>
+{% empty %}
+    There are no user profiles yet.
+{% endfor %}
+
+</body>
+</html>
