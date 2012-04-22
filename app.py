@@ -1,10 +1,11 @@
 import os
+from app.models import UserProfile
 from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', userprofiles=UserProfile.objects.all())
 
 @app.route('/hawka')
 def hawka():
