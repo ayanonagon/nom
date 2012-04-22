@@ -6,6 +6,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html', name=name)
 
+@app.route('/hawka')
+def hawka():
+    return render_template('hawka.html', name=name)
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
