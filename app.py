@@ -3,14 +3,14 @@ from orders.models import UserProfile
 from flask import Flask, render_template, redirect, url_for
 app = Flask(__name__)
 
-@app.route('/')
+#@app.route('/')
 #def basic_redirect():
 #    return redirect(url_for('index'))
 
-@app.route('/index')
-def index():
-    up = UserProfile.objects.all()
-    return render_template('index.html', userprofiles=up)
+#@app.route('/index')
+#def index():
+#    up = UserProfile.objects.all()
+#    return render_template('index.html', userprofiles=up)
 
 @app.route('/hawka')
 def hawka():
