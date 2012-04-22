@@ -9,7 +9,7 @@ def index():
 
 @app.route('/index')
 def index():
-    ups = UserProfile.objects.all()
+    up = UserProfile.objects.all()
     return render_template('index.html', userprofiles=up)
 
 @app.route('/hawka')
