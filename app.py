@@ -4,11 +4,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', name=name)
+    return render_template('index.html')
 
 @app.route('/hawka')
 def hawka():
-    return render_template('hawka.html', name=name)
+    return render_template('hawka.html')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
