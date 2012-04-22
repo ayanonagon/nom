@@ -1,5 +1,5 @@
 import os
-from app.models import UserProfile
+from orders.models import UserProfile
 from flask import Flask, render_template, redirect, url_for
 app = Flask(__name__)
 
