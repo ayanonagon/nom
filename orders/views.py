@@ -6,6 +6,7 @@ from django.views.generic.simple import direct_to_template
 from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.context_processors import csrf
 
 # Caching
 from django.views.decorators.cache import never_cache
@@ -20,10 +21,6 @@ from orders.models import UserProfile, Item, Order
 from collections import defaultdict
 
 ###############################################
-
-#def login(request):    
-    #email = request.POST['email']
-    #password = request.POST['password']
 
 def userlist(request):
     """ return a list of userprofiles """
@@ -48,3 +45,9 @@ def items_in_order(request, order_id):
     items_in_order = Item.objects.filter(order=selected_order)
 
     return render_to_response('order.html', {"items": items_in_order, "order": selected_order})
+
+def login(request):
+    """ logs in a user """
+
+def logout(request):
+    """ logs a user out """
