@@ -18,5 +18,4 @@ class RegistrationForm(UserCreationForm):
                                      new_data['password1'])
         u.is_active = True
         u.save()
-        profile = UserProfile(user=u, first_name=u.first_name, phone_number=new_data['phone_number'])
-        return u, profile
+        return u, new_data['first_name'], new_data['phone_number'], new_data['username'], new_data['password1']

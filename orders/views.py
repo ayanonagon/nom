@@ -71,14 +71,21 @@ def nomregister(request):
     if request.POST:
         new_data = request.POST.copy()
         # Save the profile
-        new_user, new_profile = formdata.save(new_data)
+        new_user, first_name, phone_number, username, password = formdata.save(new_data)
+        new_profile = UserProfile(user=new_user, first_name=first_name, phone_number=phone_number)
         new_profile.save()
         # Login the new user
-        user = authenticate(username=new_user.username, password=new_user.password)
+        user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-        return render_to_response('userlist.html')
+                state = "You're successfully registered!"
+            else:
+                state = "Your account is not active, please contact the site admin."
+        else:
+            state = "Your registration details, username, and/or password were incorrect."
+        context = {'state': state, 'username': username}
+        return render_to_response('auth.html', context)
     else:
         errors = new_data = {}
     
