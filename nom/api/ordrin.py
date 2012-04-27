@@ -5,18 +5,18 @@ from food import Item
 from food import Category
 
 ORDERIN_API_KEY = 'X2RlbGl2ZXJpbmciOjAsIg'
-TEST_URL = 'https://r-test.ordr.in/'
+TEST_URL_R = 'https://r-test.ordr.in/'
 
 def __find_restaurants(street, city, zipcode):
     """Return a list of JSON objects representing restaurants around a given
     street, city, and zipcode."""
-    url = (TEST_URL + 'dl/ASAP/' + zipcode + '/' + city + '/' + street).replace(' ', '+')
+    url = (TEST_URL_R + 'dl/ASAP/' + zipcode + '/' + city + '/' + street).replace(' ', '+')
     return simplejson.loads(urllib2.urlopen(url).read())
 
 def fetch_menu_items(restaurant_id):
     """Return a list of JSON objects representing menu items for a restaurant
     identified by the give id."""
-    url = TEST_URL + 'rd/' + str(restaurant_id)
+    url = TEST_URL_R + 'rd/' + str(restaurant_id)
     response = urllib2.urlopen(url).read()
     return simplejson.loads(response)
 
@@ -34,25 +34,24 @@ def get_menu_items(restaurant_id):
                                 pass
 
 
-def turn_into_restaurant(res):
+def __turn_into_restaurant(res):
+    """Convert JSON representation of a restaurant to a Restaurant object.""" 
     return Restaurant(res['city'], res['ad'], res['mino'], res['na'], res['del'], 
-            res['is_delivering'], res['id'], res['cu'])
-
+        res['is_delivering'], res['id'], res['cu'])
 
 def get_restaurants(street, city, zipcode):
+    """Return a list of Restaurant objects around a given street, city,
+    and zipcode."""
     restaurants = find_restaurants('401 Harvey Road', 'College Station', '77840')
-    return [turn_into_restaurant(restaurant) for restaurant in restaurants]
+    return [__turn_into_restaurant(restaurant) for restaurant in restaurants]
 
 if __name__ == '__main__':
     restaurants = __find_restaurants('401 Harvey Road', 'College Station', '77840')
     for restaurant in restaurants:
         #print restaurant, "\n", "\n"
         pass
-    
-    info = get_menu_items(147)
-    items = info['menu']
-    for item in items:
-        print item, "\n", "\n"
 
-    print info['meal_name']
+    info = get_menu_items(147)
+
+    #print info['meal_name']
 
