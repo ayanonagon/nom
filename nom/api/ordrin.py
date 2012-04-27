@@ -25,11 +25,7 @@ def turn_into_restaurant(res):
 
 def get_restaurants(street, city, zipcode):
     restaurants = find_restaurants('401 Harvey Road', 'College Station', '77840')
-    rests = []
-    for restaurant in restaurants:
-        rests.append(turn_into_restaurant(restaurant))
-    return rests
-    
+    return [turn_into_restaurant(restaurant) for restaurant in restaurants]
 
 if __name__ == '__main__':
     restaurants = find_restaurants('401 Harvey Road', 'College Station', '77840')
