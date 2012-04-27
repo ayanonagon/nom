@@ -1,6 +1,6 @@
 {% for userprofile in userprofiles %}
     {# Each "userprofile" is a UserProfile model object. #}
-    {{ userprofile.phone_number }}<br />
+    {{ userprofile.user.first_name }} : {{ userprofile.phone_number }}<br />
     ...
 {% endfor %}
 

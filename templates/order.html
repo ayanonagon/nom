@@ -1,0 +1,17 @@
+<html>
+<head>
+</head>
+
+<body>
+<h1> {{ order.owner.first_name }} is ordering from {{ order.restaurant }}</h1>
+<h2> Destination: {{ order.destination }} </h2>
+<h3> So are {% for userprofile in order.joiners.all %} {{ userprofile.first_name }} {% endfor %}</h3> 
+<h4> {{ order.name }} : {{ order.description }} </h4>
+
+{% for item in items %}
+    {# Each "item" is an Item model object. #}
+    {{ item.name }} ordered by {{ item.owner.first_name }}<br />
+{% endfor %}
+</body>
+
+</html>

@@ -3,7 +3,7 @@ from django.views.generic.simple import direct_to_template, redirect_to
 from django.views.generic import RedirectView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from orders.views import userlist
+from orders.views import userlist, items_in_order
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -13,7 +13,9 @@ urlpatterns = patterns('',
     
     url('^index/$', direct_to_template, {'template': 'index.html'}),
 
-    url('^users/$', userlist, name='userlist'),
+    url('^users/$', userlist),
+
+    url('^order/(?P<order_id>\d{6})/$', items_in_order),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
