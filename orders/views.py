@@ -42,7 +42,9 @@ def userlist(request):
     
     return render_to_response('userlist.html', {"userprofiles": userprofiles})
 
-def index(request):
-    return render_to_response('index.html')
+def items_in_order(request, order_id):
+    """ returns a list of items in the given order """
+    selected_order = Order.objects.get(order_id=order_id)
+    items_in_order = Item.objects.filter(order=selected_order)
 
-
+    return render_to_response('order.html', {"items": items_in_order, "order": selected_order})
