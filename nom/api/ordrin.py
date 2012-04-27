@@ -20,20 +20,23 @@ def get_menu_items(restaurant_id):
     response = urllib2.urlopen(url).read()
     return simplejson.loads(response)
 
-def turn_into_restaurant(res):
+def __turn_into_restaurant(res):
+   """Convert JSON representation of a restaurant to a Restaurant object.""" 
     return Restaurant(res['city'], res['ad'], res['mino'], res['na'], res['del'], 
             res['is_delivering'], res['id'], res['cu'])
 
 def get_restaurants(street, city, zipcode):
+    """Return a list of Restaurant objects around a given street, city,
+    and zipcode."""
     restaurants = find_restaurants('401 Harvey Road', 'College Station', '77840')
-    return [turn_into_restaurant(restaurant) for restaurant in restaurants]
+    return [__turn_into_restaurant(restaurant) for restaurant in restaurants]
 
 if __name__ == '__main__':
     restaurants = __find_restaurants('401 Harvey Road', 'College Station', '77840')
     for restaurant in restaurants:
         #print restaurant, "\n", "\n"
         pass
-    
+
     info = get_menu_items(147)
     items = info['menu']
     for item in items:
