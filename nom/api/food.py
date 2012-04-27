@@ -47,6 +47,9 @@ class Restaurant(object):
     def tags(self):
         return self._tags
 
+    def __str__(self):
+        return self.name + ": " + self.address
+
 class Item(object):
     def __init__(self, name, price, description, iid, children):
         self._name = name
@@ -79,11 +82,14 @@ class Item(object):
 
 class Category(object):
     """A class representing a Ordrin food category."""
-
-    def __init__(self, name):
+    def __init__(self, name, items):
         self._name = name
+        self._items = items
 
     @property
     def name(self):
         return self._name
+    @property
+    def items(self):
+        return self._items
 
