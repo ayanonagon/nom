@@ -1,6 +1,8 @@
 import urllib2
 import simplejson
 from food import Restaurant
+from food import Item
+from food import Category
 
 ORDERIN_API_KEY = 'X2RlbGl2ZXJpbmciOjAsIg'
 TEST_URL_R = 'https://r-test.ordr.in/'
@@ -16,7 +18,7 @@ def get_menu_items(restaurant_id):
     identified by the give id."""
     url = TEST_URL_R + 'rd/' + str(restaurant_id)
     response = urllib2.urlopen(url).read()
-    return simplejson.loads(response)['menu']
+    return simplejson.loads(response)
 
 def turn_into_restaurant(res):
     return Restaurant(res['city'], res['ad'], res['mino'], res['na'], res['del'], 
@@ -29,9 +31,13 @@ def get_restaurants(street, city, zipcode):
 if __name__ == '__main__':
     restaurants = __find_restaurants('401 Harvey Road', 'College Station', '77840')
     for restaurant in restaurants:
-        #rest = turn_into_restaurant(restaurant)
+        #print restaurant, "\n", "\n"
         pass
     
-    items = get_menu_items(100)
+    info = get_menu_items(147)
+    items = info['menu']
     for item in items:
-        print item
+        print item, "\n", "\n"
+
+    print info['meal_name']
+
