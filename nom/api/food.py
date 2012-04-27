@@ -37,3 +37,38 @@ class Restaurant(object):
     @property
     def tags(self):
         return self._tags
+
+class Item(object):
+    def __init__(self, name, price, description, iid, children):
+        self._name = name
+        self._price = price
+        self._description = description
+        self._iid = iid
+        self._children = children
+        
+
+    @property
+    def name(self):
+        return self._name
+    @property
+    def price(self):
+        return self._price
+    @property
+    def description(self):
+        return self._description
+    @property
+    def iid(self):
+        return self._iid
+    @property
+    def children(self):
+        return self._children
+        
+
+
+class Category(object):
+    def __init__(self, name):
+        self._name = name
+    @property
+    def name(self):
+        return self._name
+
