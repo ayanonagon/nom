@@ -23,14 +23,17 @@
                      <li><a href="/users/">Users</a></li>
                     <br />
                     {% if user.is_authenticated %}
-                    <!-- Authenticate account menu -->
+                    <h4>Logout</h4>
+                    <form action="/logout/" method="post" accept-charset="utf-8">
+                        <input type="submit" value="Logout →" class="nice medium radius blue button">
+                    </form>
                     {% else %}
                     <h4>Login</h4>
                     <form action="/login/" method="post" accept-charset="utf-8">
-                        {% csrf_token %}
                         <label for="username">Username</label><input type="text" name="username" value="" id="username" />
                         <label for="password">Password</label><input type="password" name="password" value="" id="password" />
-                        <p><input type="submit" value="Login →"></p>
+                        <br /><br />
+                        <p><input type="submit" value="Login →" class="nice medium radius blue button"></p>
                     </form>
                     {% endif %}
                  </ul>

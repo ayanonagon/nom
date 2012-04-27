@@ -6,7 +6,6 @@ from django.views.generic.simple import direct_to_template
 from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.context_processors import csrf
 
 # Caching
 from django.views.decorators.cache import never_cache
@@ -16,12 +15,15 @@ from django.utils.cache import get_cache_key
 from django import http
 
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from orders.models import UserProfile, Item, Order
 
 from collections import defaultdict
 
 ###############################################
 
+@login_required
 def userlist(request):
     """ return a list of userprofiles """
     user_list = UserProfile.objects.all()
@@ -39,6 +41,7 @@ def userlist(request):
     
     return render_to_response('userlist.html', {"userprofiles": userprofiles})
 
+@login_required
 def items_in_order(request, order_id):
     """ returns a list of items in the given order """
     selected_order = Order.objects.get(order_id=order_id)
@@ -48,6 +51,25 @@ def items_in_order(request, order_id):
 
 def login(request):
     """ logs in a user """
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
 
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                state = "You're successfully logged in!"
+            else:
+                state = "Your account is not active, please contact the site admin."
+        else:
+            state = "Your username and/or password were incorrect."
+
+    context = {'state': state, 'username': username}
+    return render_to_response('auth.html', context)
+
+@login_required
 def logout(request):
     """ logs a user out """
+    logout(request)
+    return render_to_response('index.html')
