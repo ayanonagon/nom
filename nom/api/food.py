@@ -66,9 +66,13 @@ class Item(object):
 
 
 class Category(object):
-    def __init__(self, name):
+    def __init__(self, name, items):
         self._name = name
+        self._items = items
     @property
     def name(self):
         return self._name
+    @property
+    def items(self):
+        return self._items
 

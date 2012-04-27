@@ -13,12 +13,26 @@ def __find_restaurants(street, city, zipcode):
     url = (TEST_URL + 'dl/ASAP/' + zipcode + '/' + city + '/' + street).replace(' ', '+')
     return simplejson.loads(urllib2.urlopen(url).read())
 
-def get_menu_items(restaurant_id):
+def fetch_menu_items(restaurant_id):
     """Return a list of JSON objects representing menu items for a restaurant
     identified by the give id."""
     url = TEST_URL + 'rd/' + str(restaurant_id)
     response = urllib2.urlopen(url).read()
     return simplejson.loads(response)
+
+def get_menu_items(restaurant_id):
+    """Returns the items a restaurant has, as a list of categories"""
+    items = fetch_menu_items(restaurant_id)
+    for item in items:
+        if 'is_orderable' in item and item['is_orderable'] == 0:
+            #this is a category (presumably)
+            for child in item['children']:
+                if 'children' in child:
+                    for subchild in child['children']:
+                        if 'children' in subchild:
+                            for subsubchild in subchild['children']:
+                                pass
+
 
 def turn_into_restaurant(res):
     return Restaurant(res['city'], res['ad'], res['mino'], res['na'], res['del'], 
