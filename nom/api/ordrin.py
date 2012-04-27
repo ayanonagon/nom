@@ -4,7 +4,6 @@ from food import Restaurant
 
 ORDERIN_API_KEY = 'X2RlbGl2ZXJpbmciOjAsIg'
 TEST_URL_R = 'https://r-test.ordr.in/'
-TEST_URL_O = 'https://o-test.ordr.in/'
 
 def __find_restaurants(street, city, zipcode):
     """Return a list of JSON objects representing restaurants around a given
@@ -22,7 +21,6 @@ def get_menu_items(restaurant_id):
 def turn_into_restaurant(res):
     return Restaurant(res['city'], res['ad'], res['mino'], res['na'], res['del'], 
             res['is_delivering'], res['id'], res['cu'])
-
 
 def get_restaurants(street, city, zipcode):
     restaurants = find_restaurants('401 Harvey Road', 'College Station', '77840')
