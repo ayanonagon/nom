@@ -13,7 +13,7 @@ def __find_restaurants(street, city, zipcode):
     url = (TEST_URL + 'dl/ASAP/' + zipcode + '/' + city + '/' + street).replace(' ', '+')
     return simplejson.loads(urllib2.urlopen(url).read())
 
-def fetch_menu_items(restaurant_id):
+def __fetch_menu_items(restaurant_id):
     """Return a list of JSON objects representing menu items for a restaurant
     identified by the give id."""
     url = TEST_URL + 'rd/' + str(restaurant_id)
@@ -22,7 +22,7 @@ def fetch_menu_items(restaurant_id):
 
 def get_menu_items(restaurant_id):
     """Returns the items a restaurant has, as a list of categories"""
-    items = fetch_menu_items(restaurant_id)['menu']
+    items = __fetch_menu_items(restaurant_id)['menu']
     cats = []
     for item in items:
         if 'is_orderable' in item and item['is_orderable'] == 0:
@@ -65,9 +65,6 @@ def get_key_if_exists(dic, key, other_val):
         return dic[key]
     return other_val
 
-
-
-
 def turn_into_restaurant(res):
     """Returns a restaurant object given the dictionary"""
     return Restaurant(res['city'], res['ad'], res['mino'], res['na'], res['del'], 
@@ -76,16 +73,17 @@ def turn_into_restaurant(res):
 
 def get_restaurants(street, city, zipcode):
     """fetches restaurants nearby, and returns them as a list of Restaurant objects"""
-    restaurants = find_restaurants('401 Harvey Road', 'College Station', '77840')
+    restaurants = __find_restaurants('401 Harvey Road', 'College Station', '77840')
     return [turn_into_restaurant(restaurant) for restaurant in restaurants]
 
 if __name__ == '__main__':
-    restaurants = __find_restaurants('401 Harvey Road', 'College Station', '77840')
+    restaurants = get_restaurants('401 Harvey Road', 'College Station', '77840')
     for restaurant in restaurants:
-        #print restaurant, "\n", "\n"
+        print restaurant, "\n"
         pass
     
     cats = get_menu_items(147)
     for cat in cats:
-        print cat.name, "\n"
+        #print cat.name, "\n"
+        pass
 
