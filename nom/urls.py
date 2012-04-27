@@ -11,16 +11,17 @@ from orders.views import *
 
 urlpatterns = patterns('',
     
-    url('^index/$', direct_to_template, {'template': 'index.html'}),
-
     url('^users/$', userlist),
 
     url('^order/(?P<order_id>\d{6})/$', items_in_order),
 
     # dealing with logins
-    url(r'^login/$', login),
-    url(r'^logout/$', logout),
-
+    url(r'^login/$', logout_required(nomlogin)),
+    url(r'^logout/$', nomlogout),
+    url(r'^register/$', logout_required(nomregister)),
+   
+    url('^$', direct_to_template, {'template': 'index.html'}),
+ 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     

@@ -20,7 +20,6 @@
                  {% block sidebar %}
                  <ul>
                      <li><a href="/">Home</a></li>
-                     <li><a href="/users/">Users</a></li>
                     <br />
                     {% if user.is_authenticated %}
                     <h4>Logout</h4>
@@ -35,6 +34,7 @@
                         <br /><br />
                         <p><input type="submit" value="Login →" class="nice medium radius blue button"></p>
                     </form>
+                    <a href="/register/">Register?</a>
                     {% endif %}
                  </ul>
                  {% endblock %}

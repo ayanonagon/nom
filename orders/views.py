@@ -15,13 +15,26 @@ from django.utils.cache import get_cache_key
 from django import http
 
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+
 from orders.models import UserProfile, Item, Order
+from orders.nomforms import RegistrationForm
 
 from collections import defaultdict
 
 ###############################################
+
+# reverse of login_required.
+def logout_required(view):
+    def f(request, *args, **kwargs):
+        if request.user.is_anonymous():
+            return view(request, *args, **kwargs)
+        return HttpResponseRedirect('/')
+    return f
 
 @login_required
 def userlist(request):
@@ -49,7 +62,29 @@ def items_in_order(request, order_id):
 
     return render_to_response('order.html', {"items": items_in_order, "order": selected_order})
 
-def login(request):
+def nomregister(request):
+    if request.user.is_authenticated():
+        # They already have an account; don't let them register again
+        return render_to_response('register.html', {'has_account': True})
+
+    formdata = RegistrationForm()
+    if request.POST:
+        new_data = request.POST.copy()
+        # Save the profile
+        new_user, new_profile = formdata.save(new_data)
+        new_profile.save()
+        # Login the new user
+        user = authenticate(username=new_user.username, password=new_user.password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+        return render_to_response('userlist.html')
+    else:
+        errors = new_data = {}
+    
+    return render_to_response('register.html', {'form': formdata})
+
+def nomlogin(request):
     """ logs in a user """
     if request.POST:
         username = request.POST['username']
@@ -69,7 +104,7 @@ def login(request):
     return render_to_response('auth.html', context)
 
 @login_required
-def logout(request):
+def nomlogout(request):
     """ logs a user out """
     logout(request)
     return render_to_response('index.html')
