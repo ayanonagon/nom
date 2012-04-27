@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Noms</title>
+    <link rel="stylesheet" href="/static/stylesheets/foundation.css">
+    <script src="/static/javascripts/app.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns">
+                <h2>For The Noms</h2>
+                <h5>Social/Local/Edible</h5>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="two columns">
+                 {% block sidebar %}
+                 <ul>
+                     <li><a href="/">Home</a></li>
+                     <li><a href="/users/">Users</a></li>
+                    <br />
+                    {% if user.is_authenticated %}
+                    <!-- Authenticate account menu -->
+                    {% else %}
+                    <h4>Login</h4>
+                    <form action="/login/" method="post" accept-charset="utf-8">
+                        {% csrf_token %}
+                        <label for="username">Username</label><input type="text" name="username" value="" id="username" />
+                        <label for="password">Password</label><input type="password" name="password" value="" id="password" />
+                        <p><input type="submit" value="Login →"></p>
+                    </form>
+                    {% endif %}
+                 </ul>
+                 {% endblock %}
+             </div>
+
+             <div class="ten columns">
+                 {% block content %}{% endblock %}
+             </div>
+        </div>
+    </div>
+</body>
+</html>
