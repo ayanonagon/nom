@@ -1,0 +1,21 @@
+{% for userprofile in userprofiles %}
+    {# Each "userprofile" is a UserProfile model object. #}
+    {{ userprofile.phone_number }}<br />
+    ...
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if userprofiles.has_previous %}
+            <a href="?page={{ userprofiles.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ userprofiles.number }} of {{ userprofiles.paginator.num_pages }}.
+        </span>
+
+        {% if userprofiles.has_next %}
+            <a href="?page={{ userprofiles.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
