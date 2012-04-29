@@ -60,6 +60,11 @@ def userlist(request):
 def items_in_order(request, order_id):
     """ returns a list of items in the given order """
     selected_order = Order.objects.get(order_id=order_id)
+
+    if request.POST:
+        """ adds a user to an order """
+        selected_order.joiners.add(request.user.get_profile())
+
     items_in_order = Item.objects.filter(order=selected_order)
 
     return render_to_response('order.html', {"items": items_in_order, "order": selected_order})
@@ -140,4 +145,3 @@ def nomsave(request):
     state = "Order created."
     context = {'state': state}
     return render_to_response('auth.html', context)
-

@@ -2,9 +2,10 @@
 {% block content %}
 
 <h1> {{ order.owner.first_name }} is ordering from {{ order.restaurant }}</h1>
-<h2> Destination: {{ order.destination }} </h2>
+<h4> Destination: {{ order.destination }} </h4>
+<h5> {{ order.name }}: {{ order.description }} </h5>
 <h3> With: {% for userprofile in order.joiners.all %} {{ userprofile.first_name }} {% endfor %}</h3> 
-<h4> {{ order.name }}: {{ order.description }} </h4>
+<form action="." method="post"> <input type="submit" name="Join Order" value="Join Order" class="nice small radius blue button"> </form> 
 
 {% for item in items %}
     {# Each "item" is an Item model object. #}
