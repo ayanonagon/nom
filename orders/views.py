@@ -27,6 +27,7 @@ from orders.nomforms import RegistrationForm
 from collections import defaultdict
 from datetime import datetime
 from datetime import timedelta
+from random import randint
 
 ###############################################
 
@@ -159,8 +160,7 @@ def nomsave(request):
         description = request.POST['order_description']
         timeout = int(request.POST['timeout'])
         time_ending = datetime.now() + timedelta(minutes = timeout) 
-        order = Order(name=order_name, restaurant=restaurant, owner=owner, destination=destination, description=description, order_id=123123, time_ending=time_ending)
+        order_id = randint(100000, 999999)
+        order = Order(name=order_name, restaurant=restaurant, owner=owner, destination=destination, description=description, order_id=order_id, time_ending=time_ending)
         order.save()
-    state = "Order created."
-    context = {'state': state}
-    return render_to_response('auth.html', context)
+    return redirect('/order/' + str(order_id))
