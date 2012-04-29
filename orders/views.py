@@ -57,6 +57,25 @@ def userlist(request):
     return render_to_response('userlist.html', {"userprofiles": userprofiles})
 
 @login_required
+def openorderlist(request):
+    """ return a list of all open orders """
+    order_list = Order.objects.all()
+    open_order_list = order_list.filter(time_ending > datetime.now())
+    paginator = Paginator(open_order_list, 25) # show 25 orders per page
+    
+    page = request.GET.get('page')
+    try:
+        openorders = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        openorders = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        openorders = paginator.page(paginator.num_pages)
+
+    return render_to_response('openorders.html', {"openorders": openorders})
+
+@login_required
 def items_in_order(request, order_id):
     """ returns a list of items in the given order """
     selected_order = Order.objects.get(order_id=order_id)
