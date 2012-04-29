@@ -1,5 +1,5 @@
 # change to whatever your directory for sqlite db is
 db
 
-*.swp
+.*.swp
 *.pyc
