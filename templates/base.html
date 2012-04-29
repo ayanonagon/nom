@@ -19,8 +19,10 @@
             <div class="two columns">
                  {% block sidebar %}
                  <ul>
-                     <li><a href="/">Home</a></li>
-                    <br />
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/new_order/">Create New Order</a></li>
+                    <li><a href="/orders/">Open Orders</a></li>
+                    <li><a href="/users/">All Users</a></li>
                     {% if user.is_authenticated %}
                     <h4>Logout</h4>
                     <form action="/logout/" method="post" accept-charset="utf-8">
