@@ -19,7 +19,7 @@ class Order(models.Model):
     name = models.CharField(max_length=80) # name of the order
     description = models.CharField(max_length=200) # description of the order
 
-    restaurant = models.IntegerField() # restaurant the order is placed at: stored as Ordr.in restaurant id.
+    restaurant = models.CharField(max_length=80) # restaurant the order is placed at: stored as Ordr.in restaurant id.
     destination = models.CharField(max_length=200) # where user wants order delivered to.
 
     owner = models.ForeignKey(UserProfile, related_name="started_orders") # The user who started the order.

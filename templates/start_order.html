@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2> Start an order </h2>
+    <form action="/save_order/" method="post" accept-charset="utf-8">
+        
+        <label for="order_name">Order name:</label><input type="text" name="order_name" value="" id="order_name" />
+        <label for="order_description">Order description:</label><input type="text" name="order_description" value="" id="order_description" />
+        <label for="from_location">From location:</label><input type="text" name="from_location" value="" id="from_location" />
+        <label for="to_location">To location:</label><input type="text" name="to_location" value="" id="to_location" />
+        <label for="timeout">Timeout:</label><input type="text" name="timeout" value="" id="timeout" />
+
+        <br />
+        <br />
+        <p><input type="submit" value="Start an order" class="nice medium radius blue button"></p>
+    </form>
+
+{% endblock %}

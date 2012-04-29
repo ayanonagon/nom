@@ -19,7 +19,8 @@ urlpatterns = patterns('',
     url(r'^login/$', logout_required(nomlogin)),
     url(r'^logout/$', nomlogout),
     url(r'^register/$', logout_required(nomregister)),
-   
+    url(r'^start_order/$', nomcreate),
+    url(r'^save_order/$', nomsave),
     url('^$', direct_to_template, {'template': 'index.html'}),
  
     # Uncomment the admin/doc line below to enable admin documentation:

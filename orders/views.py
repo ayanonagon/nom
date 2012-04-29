@@ -25,6 +25,8 @@ from orders.models import UserProfile, Item, Order
 from orders.nomforms import RegistrationForm
 
 from collections import defaultdict
+from datetime import datetime
+from datetime import timedelta
 
 ###############################################
 
@@ -115,3 +117,27 @@ def nomlogout(request):
     """ logs a user out """
     logout(request)
     return render_to_response('index.html')
+
+@login_required
+def nomcreate(request):
+    """Create a new order."""
+    context = {}
+    return render_to_response('start_order.html', context)
+
+@login_required
+def nomsave(request):
+    """Saves a new order."""
+    if request.POST:
+        order_name = request.POST['order_name']
+        restaurant = request.POST['from_location']
+        owner = request.user.get_profile()
+        destination = request.POST['to_location']
+        description = request.POST['order_description']
+        timeout = int(request.POST['timeout'])
+        time_ending = datetime.now() + timedelta(minutes = timeout) 
+        order = Order(name=order_name, restaurant=restaurant, owner=owner, destination=destination, description=description, order_id=123123, time_ending=time_ending)
+        order.save()
+    state = "Order created."
+    context = {'state': state}
+    return render_to_response('auth.html', context)
+

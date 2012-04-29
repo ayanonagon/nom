@@ -1,1 +1,1 @@
-/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/static/admin/js/admin/RelatedObjectLookups.js
+/Library/Python/2.6/site-packages/django/contrib/admin/static/admin/js/admin/RelatedObjectLookups.js

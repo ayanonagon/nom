@@ -1,0 +1,1 @@
+/Users/ayanonagon/nom/media/javascripts/geo-location-javascript/js/geo_position_js_simulator.js
