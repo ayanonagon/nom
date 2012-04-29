@@ -14,6 +14,10 @@ urlpatterns = patterns('',
     url('^users/$', userlist),
     url('^orders/$', openorderlist),
 
+    # creating new orders
+    url('^new_order/$', nomcreate),
+    url('^save_order/$', nomsave),
+
     url('^order/(?P<order_id>\d{6})/$', items_in_order),
 
     # dealing with logins

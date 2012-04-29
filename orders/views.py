@@ -60,8 +60,7 @@ def userlist(request):
 @login_required
 def openorderlist(request):
     """ return a list of all open orders """
-    order_list = Order.objects.all()
-    open_order_list = order_list.filter(time_ending > datetime.now())
+    open_order_list = Order.objects.filter(time_ending__gte=datetime.now())
     paginator = Paginator(open_order_list, 25) # show 25 orders per page
     
     page = request.GET.get('page')
