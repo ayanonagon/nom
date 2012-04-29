@@ -13,8 +13,6 @@ urlpatterns = patterns('',
     
     url('^users/$', userlist),
 
-    url('^order/(?P<order_id>\d{6})/join/.+$', items_in_order),
-    url('^order/(?P<order_id>\d{6})/join/$', joinorder),
     url('^order/(?P<order_id>\d{6})/$', items_in_order),
 
     # dealing with logins

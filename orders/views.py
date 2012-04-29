@@ -58,6 +58,11 @@ def userlist(request):
 def items_in_order(request, order_id):
     """ returns a list of items in the given order """
     selected_order = Order.objects.get(order_id=order_id)
+
+    if request.POST:
+        """ adds a user to an order """
+        selected_order.joiners.add(request.user.get_profile())
+
     items_in_order = Item.objects.filter(order=selected_order)
 
     return render_to_response('order.html', {"items": items_in_order, "order": selected_order})
@@ -116,9 +121,3 @@ def nomlogout(request):
     logout(request)
     return render_to_response('index.html')
 
-@login_required
-def joinorder(request, order_id):
-    """ adds a user to an order """
-    selected_order = Order.objects.get(order_id=order_id)
-    selected_order.joiners.add(request.user.get_profile())
-    return items_in_order(request, order_id)    

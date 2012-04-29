@@ -5,7 +5,7 @@
 <h4> Destination: {{ order.destination }} </h4>
 <h5> {{ order.name }}: {{ order.description }} </h5>
 <h3> With: {% for userprofile in order.joiners.all %} {{ userprofile.first_name }} {% endfor %}</h3> 
-<form action="join/" method="post"> <input type="submit" value="Join Order" class="nice small radius blue button"> </form> 
+<form action="." method="post"> <input type="submit" name="Join Order" value="Join Order" class="nice small radius blue button"> </form> 
 
 {% for item in items %}
     {# Each "item" is an Item model object. #}
