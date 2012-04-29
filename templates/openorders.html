@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for order in openorders %}
+    {# Each "order" is an Order model object. #}
+    <!-- {{ order.restaurant }} : {{ order.destination }}<br /> -->
+{% endfor %}
+
+<h2>Open Orders</h2>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if openorders.has_previous %}
+            <a href="?page={{ openorders.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ openorders.number }} of {{ openorders.paginator.num_pages }}.
+        </span>
+
+        {% if openorders.has_next %}
+            <a href="?page={{ openorders.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}
