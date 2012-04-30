@@ -5,8 +5,8 @@
 
 {% for order in openorders %}
     {# Each "order" is an Order model object. #}
-    {{ order.name }} <br />
-    {{ order.restaurant }} : {{ order.destination }}<br /> <br />
+    <a href="/order/{{ order.order_id }}/">{{ order.name }}</a><br />
+    {{ order.restaurant }} : {{ order.destination }} <br /> <br />
 
 {% endfor %}
 
