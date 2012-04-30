@@ -92,8 +92,9 @@ def items_in_order(request, order_id):
             selected_order.joiners.add(request.user.get_profile())
          elif 'Add Item' in request.POST:
             """ adds user to order if not a member, adds selected item. """
+            print request.POST
             selected_order.joiners.add(request.user.get_profile())
-            new_item = Item(owner = request.user.get_profile(), order = selected_order, name = request.POST['name'], item_id = request.POST['item_id'])            
+            new_item = Item(owner = request.user.get_profile(), order = selected_order, name = request.POST['add_item'] )            
             #TODO       
     
     items_in_order = Item.objects.filter(order=selected_order)
