@@ -7,11 +7,11 @@
 <h3> With: {% for userprofile in order.joiners.all %} {{ userprofile.first_name }} {% endfor %}</h3> 
 <form action="." method="post"> <input type="submit" name="Join Order" value="Join Order" class="nice small radius blue button"> </form> 
 
-{% for item in items %}
+{% for item1 in items %}
     {# Each "item" is an Item model object. #}
-    {{ item.name }} ordered by {{ item.owner.first_name }}<br />
+    {{ item1.name }} ordered by {{ item1.owner.first_name }}<br />
 {% endfor %}
 
-<form action="." method="post"><select name="add_item" id="add_item" />{% for item in all_items %} <option value={{ item.item_id }}>{{ item.name }}</option> {% endfor %} </select><input type="submit" name="Add Item" value="Add Item" class="nice small radius blue button"> </form>
+<form action="." method="post"><select name="add_item" id="add_item" />{% for item in all_items %} <option value={{ item.name }}>{{ item.name }}</option> {% endfor %} </select><input type="submit" name="Add Item" value="Add Item" class="nice small radius blue button"> </form>
 
 {% endblock %}

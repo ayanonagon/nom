@@ -36,7 +36,6 @@ class Item(models.Model):
     """A Django model representing an item of food or drink ordered by a user."""
 
     name = models.CharField(max_length=80) # name of the item
-    item_id = models.IntegerField() # item id number
 
     owner = models.ForeignKey(UserProfile, related_name="items_ordered_over_lifetime") # person who ordered this item.
     order = models.ForeignKey(Order, related_name="items_in_the_order") # the order which the item is in
