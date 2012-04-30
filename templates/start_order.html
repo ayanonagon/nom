@@ -10,7 +10,6 @@
         <label for="from_location">Order from:</label><select name="from_location" id="from_location" />{% for restaurant in restaurants %} <option value={{ restaurant.rid }}> {{ restaurant.name }} </option> {% endfor %} </select>
         <label for="to_location">Destination:</label><input type="text" name="to_location" value="" id="to_location" />
         <label for="timeout">In how many minutes do you plan on actually ordering?</label><input type="text" name="timeout" value="" id="timeout" />
-
         <br />
         <br />
         <p><input type="submit" value="Start an order" class="nice medium radius blue button"></p>

@@ -2,3 +2,29 @@ CIS 192 Final Project
 
 Project Name: nom
 Members: Amalia Hawkins (hawka), Pulak Mittal (pulak), Ayaka Nonaka (nonakaa)
+
+media/ # contains all css, javascript files
+  javascripts/ # javascript files
+  stylesheets/ # zurb foundation 
+
+nom/ # contains django project files
+  lots of project mapping config files
+orders/ # contains django application specific files and api interfaces to foursquare, twilio, and ordrin
+  __init__.py # django's default init file
+  food.py # python models for ordrin interfacing
+  foursquare.py # foursquare api interface
+  locations.py # deals with penn locations
+  models.py # contains all django models for the app
+  nomforms.py # contains registration form
+  ordrin.py # ordrin api interface
+  sms.py # twilio api interface
+  views.py # django views mapping
+templates/ # contains django template files for the frontend
+  a bunch of django html files
+
+
+To start our application, run:
+python manage.py sql orders # generate tables for models defined in orders
+python manage.py syncdb # creates tables
+python manage.py collectstatic -l # to get static files to work locally
+python manage.py runserver # to start the app; go to the address specified

@@ -50,7 +50,7 @@ class Restaurant(object):
     def __str__(self):
         return self.name + ": " + self.address
 
-class Item(object):
+class FoodItem(object):
     def __init__(self, name, price, description, iid, children):
         self._name = name
         self._price = price

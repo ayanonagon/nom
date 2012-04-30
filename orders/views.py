@@ -36,6 +36,8 @@ from random import randint
 
 ###############################################
 
+restaurant_dict = {}
+
 # reverse of login_required.
 def logout_required(view):
     def f(request, *args, **kwargs):
@@ -162,13 +164,20 @@ def nomsave(request):
     """Saves a new order."""
     if request.POST:
         order_name = request.POST['order_name']
-        restaurant = request.POST['from_location']
+        restaurant_id = int(request.POST['from_location'])
+
+        restaurant = "nonexisting restaurant id"
+        restaurants = get_restaurants('401 Harvey Road', 'College Station', '77840')
+        for rest in restaurants:
+            if rest.rid == restaurant_id:
+                restaurant = rest.name
+
         owner = request.user.get_profile()
         destination = request.POST['to_location']
         description = request.POST['order_description']
         timeout = int(request.POST['timeout'])
         time_ending = datetime.utcnow().replace(tzinfo=utc) + timedelta(minutes = timeout) 
         order_id = randint(100000, 999999)
-        order = Order(name=order_name, restaurant=restaurant, owner=owner, destination=destination, description=description, order_id=order_id, time_ending=time_ending)
+        order = Order(name=order_name, rid=restaurant_id, restaurant=restaurant, owner=owner, destination=destination, description=description, order_id=order_id, time_ending=time_ending)
         order.save()
     return redirect('/order/' + str(order_id))
