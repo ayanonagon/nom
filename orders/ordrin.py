@@ -7,6 +7,8 @@ from food import Category
 ORDERIN_API_KEY = 'X2RlbGl2ZXJpbmciOjAsIg'
 TEST_URL = 'https://r-test.ordr.in/'
 
+restaurant_dict = {}
+
 def __find_restaurants(street, city, zipcode):
     """Return a list of JSON objects representing restaurants around a given
     street, city, and zipcode."""
@@ -54,8 +56,6 @@ def make_item(dic, children):
     description = get_key_if_exists(dic, 'description', '')
     return FoodItem(name, price, description, iid, children)
 
-
-
 def get_key_if_exists(dic, key, other_val):
     """
     returns the corresponding value if in the dictionary,
@@ -66,6 +66,9 @@ def get_key_if_exists(dic, key, other_val):
     return other_val
 
 def turn_into_restaurant(res):
+    if res['id'] not in restaurant_dict:
+        rid = res['id']
+        restaurant_dict[rid] = res['na']
     """Returns a restaurant object given the dictionary"""
     return Restaurant(res['city'], res['ad'], res['mino'], res['na'], res['del'], 
             res['is_delivering'], res['id'], res['cu'])
