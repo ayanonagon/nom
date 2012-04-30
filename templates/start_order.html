@@ -7,8 +7,8 @@
         
         <label for="order_name">Order name:</label><input type="text" name="order_name" value="" id="order_name" />
         <label for="order_description">Order description:</label><input type="text" name="order_description" value="" id="order_description" />
-        <label for="from_location">From location:</label><input type="text" name="from_location" value="" id="from_location" />
-        <label for="to_location">To location:</label><input type="text" name="to_location" value="" id="to_location" />
+        <label for="from_location">Order from:</label><select name="from_location" id="from_location" />{% for restaurant in restaurants %} <option value={{ restaurant.rid }}> {{ restaurant.name }} </option> {% endfor %} </select>
+        <label for="to_location">Destination:</label><input type="text" name="to_location" value="" id="to_location" />
         <label for="timeout">In how many minutes do you plan on actually ordering?</label><input type="text" name="timeout" value="" id="timeout" />
 
         <br />
