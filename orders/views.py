@@ -26,6 +26,7 @@ from orders.nomforms import RegistrationForm
 
 from collections import defaultdict
 from datetime import datetime
+from django.utils.timezone import utc
 from datetime import timedelta
 from random import randint
 
@@ -60,9 +61,9 @@ def userlist(request):
 @login_required
 def openorderlist(request):
     """ return a list of all open orders """
-    open_order_list = Order.objects.filter(time_ending__gte=datetime.now())
+    open_order_list = Order.objects.filter(time_ending__gte=datetime.utcnow().replace(tzinfo=utc))
+    open_order_list = Order.objects.all()
     paginator = Paginator(open_order_list, 25) # show 25 orders per page
-    
     page = request.GET.get('page')
     try:
         openorders = paginator.page(page)
@@ -158,7 +159,7 @@ def nomsave(request):
         destination = request.POST['to_location']
         description = request.POST['order_description']
         timeout = int(request.POST['timeout'])
-        time_ending = datetime.now() + timedelta(minutes = timeout) 
+        time_ending = datetime.utcnow().replace(tzinfo=utc) + timedelta(minutes = timeout) 
         order_id = randint(100000, 999999)
         order = Order(name=order_name, restaurant=restaurant, owner=owner, destination=destination, description=description, order_id=order_id, time_ending=time_ending)
         order.save()

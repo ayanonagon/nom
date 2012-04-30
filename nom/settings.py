@@ -1,6 +1,7 @@
 # Django settings for nom project.
 
 import os
+import warnings
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -103,6 +104,12 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+#turns datetime warning into an exception
+warnings.filterwarnings(
+                'error', r"DateTimeField received a naive datetime",
+                        RuntimeWarning, r'django\.db\.models\.fields')
+
 
 ROOT_URLCONF = 'nom.urls'
 

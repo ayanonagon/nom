@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
+<h2>Open Orders</h2>
+
 {% for order in openorders %}
     {# Each "order" is an Order model object. #}
-    <!-- {{ order.restaurant }} : {{ order.destination }}<br /> -->
-{% endfor %}
+    {{ order.name }} <br />
+    {{ order.restaurant }} : {{ order.destination }}<br /> <br />
 
-<h2>Open Orders</h2>
+{% endfor %}
 
 <div class="pagination">
     <span class="step-links">
