@@ -24,11 +24,15 @@ from django.contrib.auth.forms import UserCreationForm
 from orders.models import UserProfile, Item, Order
 from orders.nomforms import RegistrationForm
 
+from nom.api.food import Restaurant
+from nom.api.ordrin import *
+
 from collections import defaultdict
 from datetime import datetime
 from django.utils.timezone import utc
 from datetime import timedelta
 from random import randint
+
 
 ###############################################
 
@@ -145,8 +149,13 @@ def nomlogout(request):
 @login_required
 def nomcreate(request):
     """Create a new order."""
-    context = {}
-    return render_to_response('start_order.html', context)
+    restaurants = [] #list of restaurants to order from
+
+    #since ordrin only works in a couple of locations (not including Philly),
+    #data is pulled from a hardcoded location
+    restaurants = ordrin.get_restaurants('401 Harvey Road', 'College Station', '77840')
+
+    return render_to_response('start_order.html', {"restaurants" : restaurants})
 
 @login_required
 def nomsave(request):
