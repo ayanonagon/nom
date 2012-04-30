@@ -26,6 +26,7 @@ from orders.nomforms import RegistrationForm
 
 from orders.food import Restaurant
 from orders.ordrin import *
+from orders.locations import *
 
 from collections import defaultdict
 from datetime import datetime
@@ -156,8 +157,9 @@ def nomcreate(request):
     #since ordrin only works in a couple of locations (not including Philly),
     #data is pulled from a hardcoded location
     restaurants = get_restaurants('401 Harvey Road', 'College Station', '77840')
-
-    return render_to_response('start_order.html', {"restaurants" : restaurants})
+    locations = get_penn_locations()
+    locs = [ loc['name'] for loc in locations]
+    return render_to_response('start_order.html', {"locations": locs, "restaurants" : restaurants})
 
 @login_required
 def nomsave(request):

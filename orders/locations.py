@@ -1,7 +1,7 @@
 def get_penn_locations():
     """Return a list of popular UPenn locations."""
     locations = []
-    with open('locations.txt', 'rU') as f:
+    with open('orders/locations.txt', 'rU') as f:
         for line in f:
             location = {}
             parts = line.strip().split('?')
@@ -13,4 +13,4 @@ def get_penn_locations():
     return locations
 
 if __name__ == '__main__':
-    print load_locations()
+    print get_penn_locations()

@@ -17,7 +17,12 @@
         </select>
 
 
-        <label for="to_location">To location:</label><input type="text" name="to_location" value="" id="to_location" />
+        <label for="to_location">To location:</label>
+        <select name="to_location" id="to_location" />
+          {% for location in locations %}
+          <option value={{ location }}> {{ location }} </option>
+          {% endfor %}
+        </select>
 
 
 
