@@ -62,7 +62,6 @@ def userlist(request):
 def openorderlist(request):
     """ return a list of all open orders """
     open_order_list = Order.objects.filter(time_ending__gte=datetime.utcnow().replace(tzinfo=utc))
-    open_order_list = Order.objects.all()
     paginator = Paginator(open_order_list, 25) # show 25 orders per page
     page = request.GET.get('page')
     try:
