@@ -12,6 +12,6 @@
     {{ item.name }} ordered by {{ item.owner.first_name }}<br />
 {% endfor %}
 
-<form action="." method="post"><select name="add_item" id="add_item" />{% for item in items %} <option value={{ item.item_id }}>{{ item.name }}</option> {% endfor %} </select><input type="submit" name="Add Item" value="Add Item" class="nice small radius blue button"> </form>
+<form action="." method="post"><select name="add_item" id="add_item" />{% for item in all_items %} <option value={{ item.item_id }}>{{ item.name }}</option> {% endfor %} </select><input type="submit" name="Add Item" value="Add Item" class="nice small radius blue button"> </form>
 
 {% endblock %}

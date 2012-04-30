@@ -24,7 +24,7 @@ from django.contrib.auth.forms import UserCreationForm
 from orders.models import UserProfile, Item, Order
 from orders.nomforms import RegistrationForm
 
-from orders.food import Restaurant
+from orders.food import Restaurant, FoodItem
 from orders.ordrin import *
 from orders.locations import *
 
@@ -33,7 +33,6 @@ from datetime import datetime
 from django.utils.timezone import utc
 from datetime import timedelta
 from random import randint
-
 
 ###############################################
 
@@ -88,12 +87,19 @@ def items_in_order(request, order_id):
     selected_order = Order.objects.get(order_id=order_id)
 
     if request.POST:
-        """ adds a user to an order """
-        selected_order.joiners.add(request.user.get_profile())
-
+         if 'Join Order' in request.POST:
+            """ adds a user to an order """
+            selected_order.joiners.add(request.user.get_profile())
+         elif 'Add Item' in request.POST:
+            """ adds user to order if not a member, adds selected item. """
+            selected_order.joiners.add(request.user.get_profile())
+            new_item = Item(owner = request.user.get_profile(), order = selected_order, name = request.POST['name'], item_id = request.POST['item_id'])            
+            #TODO       
+    
     items_in_order = Item.objects.filter(order=selected_order)
+    all_items = just_give_me_the_items(selected_order.rid)
 
-    return render_to_response('order.html', {"items": items_in_order, "order": selected_order})
+    return render_to_response('order.html', {"items": items_in_order, "order": selected_order, "all_items": all_items})
 
 def nomregister(request):
     if request.user.is_authenticated():
