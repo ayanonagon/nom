@@ -1,7 +1,7 @@
 import urllib2
 import simplejson
 from food import Restaurant
-from food import Item
+from food import FoodItem
 from food import Category
 
 ORDERIN_API_KEY = 'X2RlbGl2ZXJpbmciOjAsIg'
@@ -52,7 +52,7 @@ def make_item(dic, children):
     iid = get_key_if_exists(dic, 'id', '0')
     name = get_key_if_exists(dic, 'name', '')
     description = get_key_if_exists(dic, 'description', '')
-    return Item(name, price, description, iid, children)
+    return FoodItem(name, price, description, iid, children)
 
 
 
