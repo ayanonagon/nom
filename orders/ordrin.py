@@ -46,7 +46,13 @@ def get_menu_items(restaurant_id):
         cats.append(Category(get_key_if_exists(item, 'name', ''), children)) 
     return cats
 
-
+def just_give_me_the_items(restaurant_id):
+    cats = get_menu_items(restaurant_id)
+    items = []
+    for cat in cats:
+        for item in cat.items:
+            items.append(item)
+    return items
 
 def make_item(dic, children):
     """Makes an Item object given an item dictionary"""
